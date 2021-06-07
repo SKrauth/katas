@@ -30,18 +30,25 @@
 
 const topThreeWords = text => {
   let output = [];
-  let words = text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").toLowerCase().split(' ').filter(a => a && a !== `'`)
+  let words = text
+    .replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "")
+    .toLowerCase()
+    .split(" ")
+    .filter(a => a && a !== `'`);
 
   words.forEach((word, i) => {
     let index = output.map(out => out.word).indexOf(word);
-    if(index > -1){
-      output[index].count += 1
+    if (index > -1) {
+      output[index].count += 1;
     } else {
-      output.push({word: word, count: 1})
+      output.push({ word: word, count: 1 });
     }
   });
 
-  return output.sort((a,b) => b.count - a.count).map(out => out.word).splice(0,3)
-}
+  return output
+    .sort((a, b) => b.count - a.count)
+    .map(out => out.word)
+    .splice(0, 3);
+};
 
-module.exports = {topThreeWords}
+module.exports = { topThreeWords };
